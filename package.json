@@ -1,0 +1,53 @@
+{
+  "name": "kazana",
+  "version": "0.0.0-semantically-released",
+  "description": "A modular data warehouse system",
+  "main": "index.js",
+  "bin": "./bin/server",
+  "scripts": {
+    "start": "./bin/server",
+    "test": "semistandard",
+    "prepublish": "semantic-release pre",
+    "postpublish": "semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eHealthAfrica/kazana.git"
+  },
+  "keywords": [
+    "kazana",
+    "data",
+    "warehouse",
+    "transform",
+    "audit",
+    "export"
+  ],
+  "author": "eHealth Africa",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/eHealthAfrica/kazana/issues"
+  },
+  "homepage": "https://github.com/eHealthAfrica/kazana#readme",
+  "dependencies": {
+    "boom": "^2.8.0",
+    "good": "^6.2.0",
+    "good-console": "^5.0.2",
+    "hapi": "^8.8.0",
+    "hoek": "^2.14.0",
+    "joi": "^6.5.0",
+    "kazana-account": "^1.0.0",
+    "kazana-bootstrap": "^1.0.0",
+    "kazana-config": "^1.0.0",
+    "kazana-raw-data": "^1.0.0",
+    "lodash": "^3.10.0",
+    "lout": "^6.2.3",
+    "minimist": "^1.1.1",
+    "pouchdb": "^3.6.0",
+    "pouchdb-authentication": "^0.4.0",
+    "pouchdb-hoodie-api": "^1.2.1"
+  },
+  "devDependencies": {
+    "semantic-release": "^3.3.2",
+    "semistandard": "^6.1.2"
+  }
+}
