@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+// index.js
+var Kazana = require('../index');
+var main = require(process.cwd());
+var argv = require('minimist')(process.argv.slice(2));
+var kazana = new Kazana(main, {
+
+  // if set to true, core modules like the kazana-raw-data do not get loaded
+  bare: argv.bare
+});
+kazana.start(function () {
+  console.log('Server running at %s', kazana.info.uri);
+});

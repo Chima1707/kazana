@@ -1,0 +1,13 @@
+{
+    "admins": {
+        "names": [],
+        "roles": []
+    },
+    "members": {
+        "names": [],
+        "roles": [
+            "kazana-data-provider",
+            "kazana-data-reviewer"
+        ]
+    }
+}
