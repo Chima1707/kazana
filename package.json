@@ -10,6 +10,8 @@
   "scripts": {
     "start": "./bin/server",
     "test": "semistandard",
+    "pretest:ci": "rm -rf node_modules/kazana-integration-test/node_modules/kazana-example/node_modules/kazana && ln -s $(pwd) node_modules/kazana-integration-test/node_modules/kazana-example/node_modules/kazana",
+    "test:ci": "( cd node_modules/kazana-integration-test/ ; bin/test-background )",
     "prepublish": "semantic-release pre",
     "postpublish": "semantic-release post"
   },
@@ -53,6 +55,7 @@
     "pouchdb-server": "^0.6.6"
   },
   "devDependencies": {
+    "kazana-integration-test": "latest",
     "semantic-release": "^3.3.2",
     "semistandard": "^6.1.2"
   }
