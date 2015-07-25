@@ -33,18 +33,19 @@
     "good": "^6.3.0",
     "good-console": "^5.0.2",
     "hapi": "^8.8.0",
+    "hapi-cors-headers": "^1.0.0",
     "hoek": "^2.14.0",
-    "joi": "^6.6.0",
+    "joi": "^6.6.1",
     "kazana-account": "^1.0.0",
-    "kazana-bootstrap": "^1.0.2",
+    "kazana-bootstrap": "^1.0.4",
     "kazana-config": "^1.0.1",
     "kazana-raw-data": "^1.1.0",
     "lodash": "^3.10.0",
     "lout": "^6.2.3",
-    "minimist": "^1.1.1",
+    "minimist": "^1.1.2",
     "pouchdb": "^3.6.0",
     "pouchdb-authentication": "^0.4.1",
-    "pouchdb-hoodie-api": "^1.2.1"
+    "pouchdb-hoodie-api": "^1.4.0"
   },
   "devDependencies": {
     "semantic-release": "^3.3.2",
