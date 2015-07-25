@@ -3,8 +3,9 @@ module.exports = kazanaServer;
 var _ = require('lodash');
 var bootstrap = require('kazana-bootstrap');
 var config = require('kazana-config');
-var goodConsole = require('good-console');
+var corsHeaders = require('hapi-cors-headers');
 var good = require('good');
+var goodConsole = require('good-console');
 var Hapi = require('hapi');
 var Hoek = require('hoek');
 var kazanaAccount = require('kazana-account');
@@ -20,9 +21,6 @@ var couchdbAuth = require('./lib/auth/couchdb');
 
 // decorators
 var replyPouchDbError = require('./lib/decorators/reply-pouchdb-error');
-
-// extensions
-var addCorsHeaders = require('./lib/extensions/add-cors-headers');
 
 // methods
 var getStore = require('./lib/methods/get-store');
@@ -88,7 +86,7 @@ function kazanaServer (main, options) {
   server.decorate('reply', 'pouchdbError', replyPouchDbError);
 
   // extensions
-  server.ext('onPreResponse', addCorsHeaders);
+  server.ext('onPreResponse', corsHeaders);
 
   // methods
   server.method('getStore', getStore, {
