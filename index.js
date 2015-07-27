@@ -121,6 +121,15 @@ function kazanaServer (main, options) {
     server.register(composePlugin(main), function (error) {
       if (error) throw error;
     });
+    if (main.plugins) {
+      main.plugins.forEach(function (plugin) {
+        plugins.push(
+          composePlugin(plugin, {
+            namespace: true
+          })
+        );
+      });
+    }
 
     plugins.forEach(function (plugin) {
       server.register(plugin, {
