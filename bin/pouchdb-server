@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+var path = require('path');
+var fs = require('fs');
+var mkdirp = require('mkdirp');
+var spawn = require('child_process').spawn;
+var kazanaConfig = require('kazana-config');
+
+var port = kazanaConfig.pouchdbServerPort;
+var dataPath = kazanaConfig.pouchdbDataPath;
+var configFilePath = path.resolve(dataPath, 'config.json');
+
+try {
+  require(configFilePath);
+} catch (error) {
+  mkdirp.sync('./.db');
+  var pouchdbConfig = {
+    log: {
+      file: './.db/log.txt'
+    },
+    admins: {}
+  };
+  pouchdbConfig.admins[kazanaConfig.pouchdbHttpAdminUser] = kazanaConfig.pouchdbHttpAdminPass;
+  fs.writeFileSync(configFilePath, JSON.stringify(pouchdbConfig, null, 4));
+}
+
+var pouchDbBinPath = path.resolve(__dirname, '../node_modules/.bin/pouchdb-server');
+spawn(pouchDbBinPath, ['-p', port, '-d', dataPath, '-c', configFilePath], {
+  stdio: 'inherit'
+});
