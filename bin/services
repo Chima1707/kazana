@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+var main = require(process.cwd());
+var corePlugins = require('../lib/core-plugins');
+
+var plugins = corePlugins.concat(main.plugins || []);
+console.log(plugins.map(toCommand).join('\n'));
+console.log('npm start -- --bare');
+
+function toCommand (object) {
+  return 'npm start -- --only=' + object.name;
+}
