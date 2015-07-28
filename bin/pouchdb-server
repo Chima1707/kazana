@@ -25,6 +25,17 @@ try {
 }
 
 var pouchDbBinPath = path.resolve(__dirname, '../node_modules/.bin/pouchdb-server');
-spawn(pouchDbBinPath, ['-p', port, '-d', dataPath, '-c', configFilePath], {
+var pouchDbServer = spawn(pouchDbBinPath, ['-p', port, '-d', dataPath, '-c', configFilePath], {
   stdio: 'inherit'
+});
+
+// Stop main process with PouchDB Server dies.
+pouchDbServer.on('exit', function(code) {
+  console.log('PouchDB Server stopped, exiting with %d.', code)
+  process.exit(code);
+});
+// Kill PouchDB server when main process dies
+process.on('exit', function(code) {
+  console.log('Killing PouchDB...')
+  pouchDbServer.kill();
 });
