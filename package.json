@@ -5,7 +5,8 @@
   "main": "index.js",
   "bin": {
     "kazana": "./bin/server",
-    "kazana-database": "./bin/pouchdb-server"
+    "kazana-database": "./bin/pouchdb-server",
+    "kazana-services": "./bin/services"
   },
   "scripts": {
     "start": "./bin/server",
