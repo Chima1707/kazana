@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-// index.js
 var Kazana = require('../index');
 var main = require(process.cwd());
 var argv = require('minimist')(process.argv.slice(2));
@@ -9,9 +8,13 @@ var kazanaConfig = require('kazana-config');
 if (kazanaConfig.pouchdbHttpUrl) {
   console.log('Connected to CouchDB at %s', kazanaConfig.pouchdbHttpUrl);
 } else {
-  kazanaConfig.pouchdbHttpUrl = 'http://localhost:' + kazanaConfig.pouchdbServerPort
-  console.log('KAZANA_POUCHDB_HTTP_URL not set, starting PouchDB Server at %s ...', kazanaConfig.pouchdbServerPort)
-  require('./pouchdb-server')
+  if (argv.bare) {
+    console.error('Must set KAZANA_POUCHDB_HTTP_URL when starting with --bare');
+    process.exit(1);
+  }
+  kazanaConfig.pouchdbHttpUrl = 'http://localhost:' + kazanaConfig.pouchdbServerPort;
+  console.log('KAZANA_POUCHDB_HTTP_URL not set, starting PouchDB Server at %s ...', kazanaConfig.pouchdbServerPort);
+  require('./pouchdb-server');
 }
 
 var kazana = new Kazana(main, {
