@@ -8,13 +8,13 @@ var good = require('good');
 var goodConsole = require('good-console');
 var Hapi = require('hapi');
 var Hoek = require('hoek');
-var kazanaAccount = require('kazana-account');
-var kazanaRawData = require('kazana-raw-data');
+
 var path = require('path');
 var PouchDB = require('pouchdb');
 var Promise = require('pouchdb/extras/promise');
 
 var composePlugin = require('./lib/compose-plugin');
+var corePlugins = require('./lib/core-plugins');
 
 // auth
 var couchdbAuth = require('./lib/auth/couchdb');
@@ -107,39 +107,23 @@ function kazanaServer (main, options) {
   }, function (error) {
     if (error) throw error;
 
-    var plugins = [];
-    if (!options.bare) {
-      plugins = plugins.concat([
-        composePlugin(kazanaAccount, {
-          namespace: true
-        }),
-        composePlugin(kazanaRawData, {
-          namespace: true
-        })
-      ]);
-    }
     server.register(composePlugin(main), function (error) {
       if (error) throw error;
     });
-    if (main.plugins) {
-      main.plugins.forEach(function (plugin) {
-        plugins.push(
-          composePlugin(plugin, {
-            namespace: true
-          })
-        );
+
+    if (!options.bare) {
+      corePlugins.map(composePlugin).forEach(function (plugin) {
+        server.log(['plugin', plugin.register.attributes.name], 'registering...');
+        server.register(plugin, {
+          routes: {
+            prefix: '/kazana/' + plugin.register.attributes.name
+          }
+        }, function (error) {
+          if (error) throw error;
+          server.log(['plugin', plugin.register.attributes.name], 'registered.');
+        });
       });
     }
-
-    plugins.forEach(function (plugin) {
-      server.register(plugin, {
-        routes: {
-          prefix: '/kazana/' + plugin.register.attributes.name
-        }
-      }, function (error) {
-        if (error) throw error;
-      });
-    });
 
     server.register({
       register: require('lout')
