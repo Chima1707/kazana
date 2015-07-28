@@ -3,7 +3,10 @@
   "version": "0.0.0-semantically-released",
   "description": "A modular data warehouse system",
   "main": "index.js",
-  "bin": "./bin/server",
+  "bin": {
+    "kazana": "./bin/server",
+    "kazana-database": "./bin/pouchdb-server"
+  },
   "scripts": {
     "start": "./bin/server",
     "test": "semistandard",
@@ -38,14 +41,16 @@
     "joi": "^6.6.1",
     "kazana-account": "^1.0.0",
     "kazana-bootstrap": "^1.0.4",
-    "kazana-config": "^1.0.1",
+    "kazana-config": "git://github.com/eHealthAfrica/kazana-config#pouchdb-server",
     "kazana-raw-data": "^1.1.0",
     "lodash": "^3.10.0",
     "lout": "^6.2.3",
     "minimist": "^1.1.2",
+    "mkdirp": "^0.5.1",
     "pouchdb": "^3.6.0",
     "pouchdb-authentication": "^0.4.1",
-    "pouchdb-hoodie-api": "^1.4.0"
+    "pouchdb-hoodie-api": "^1.4.0",
+    "pouchdb-server": "^0.6.6"
   },
   "devDependencies": {
     "semantic-release": "^3.3.2",
