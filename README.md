@@ -2,6 +2,11 @@
 
 > A modular data warehouse system
 
+[![NPM version](https://badge.fury.io/js/kazana.svg)](https://www.npmjs.com/package/kazana)
+[![Build Status](https://travis-ci.org/eHealthAfrica/kazana.svg?branch=master)](https://travis-ci.org/eHealthAfrica/kazana)
+[![Coverage Status](https://coveralls.io/repos/eHealthAfrica/kazana/badge.svg?branch=master)](https://coveralls.io/r/eHealthAfrica/kazana?branch=master)
+[![Dependency Status](https://david-dm.org/eHealthAfrica/kazana.svg)](https://david-dm.org/eHealthAfrica/kazana)
+
 ## Usage
 
 ```js
@@ -118,6 +123,17 @@ callback when finished initialisation.
 
 Array of objects with same properties as `options` for the
 `Kazana` constructor.
+
+## Local setup and Testing
+
+[![devDependency Status](https://david-dm.org/eHealthAfrica/kazana/dev-status.svg)](https://david-dm.org/eHealthAfrica/kazana#info=devDependencies)
+
+```
+git clone git@github.com:eHealthAfrica/kazana.git
+cd kazana
+npm install
+npm test
+```
 
 ### Credit
 
