@@ -7,6 +7,7 @@ sudo: false
 cache:
   directories:
   - node_modules
+  - /tmp/sv-selenium
 notifications:
   email: false
 before_install:
@@ -17,10 +18,10 @@ before_script:
 - npm prune
 - curl -Lo travis_after_all.py https://raw.github.com/dmakhno/travis_after_all/master/travis_after_all.py
 # required for running firefox
-- "export DISPLAY=:99.0"
-- "sh -e /etc/init.d/xvfb start"
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
 # Lets know what CouchDB we are playing with
-- "curl -X GET http://127.0.0.1:5984/"
+- curl -X GET http://127.0.0.1:5984/
 script: npm run $COMMAND
 after_success:
 - python travis_after_all.py
@@ -41,8 +42,8 @@ env:
   - NODE=iojs-v1 COMMAND=test
   - NODE=iojs-v2 COMMAND=test
   - NODE=0.10 COMMAND=test:coverage
-  - TEST_CLIENT=Firefox NODE=0.10 COMMAND=test:ci
-  - KAZANA_POUCHDB_HTTP_URL=http://localhost:5984 TEST_CLIENT=Firefox NODE=0.10 COMMAND=test:ci
+  - TEST_CLIENT=firefox NODE=0.10 COMMAND=test:ci
+  - KAZANA_POUCHDB_HTTP_URL=http://localhost:5984 TEST_CLIENT=firefox NODE=0.10 COMMAND=test:ci
   global:
   - secure: "A24dfI7oJyeqX6bxrOumTsWw9835rMwYly71iC6Lo0907WuTNNDAD7ZopXlLhagFGjJqXyPyR5S+u3rTsELcXyfDaAU23rzU41DpCv/3OgUoN/eM0Q6Nh7bWbgBrCWS6CovhTFBcHI3FOkxP00oPS16A/+zIzxk2EHtV6ksFGwxLx5llSgudVjP4R57M92/sVpa39Vmyn2iUm/Yd1LHH0t4t57XMLB+IwZXhe2XuqfmEeIzTdEOhptPHVBLpP0fIr+Cr7yQqDKD8+Xji5uKv7WeIXaz+EfCFwiCrqO4m1p5F5hMi+7tVL3A3cjMiGlg5/SNqfE8S6IQUP2JPFNc1QjN5MV2tUKLnC9+ZPkII+G59U5ERRz8w5bHYgT2s+Su9HTWywGmapOvxk4tNzKX26wbLavgGkRSag3NCOo1QoP+Ht8CNFK017XqGPyuhd7McEhPRTV8w9uwjuN0Di4mXUy5ELKz94QWApJRa7+fIHJvyIdEh9i9EUfF4oQ35l/UFhdewO3mmkjEvs6ZEn8fiBPkxEermOul8GFbs5htQUMHHF72yLfeOdXRhnPcefFyTXgdpoECQgWpOnHh2LVKsxVlbKVDYu0M6uQx8WNhi69e+wqxbtASLGP4DkcqCBGmCpEuTc8RiuLlM9Ep03plbY9OYXbnkDCxKbL4x7coJFnA="
 deploy:
