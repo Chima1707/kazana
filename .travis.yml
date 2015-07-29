@@ -4,9 +4,6 @@ node_js:
 services:
 - couchdb
 sudo: false
-cache:
-  directories:
-  - node_modules
 notifications:
   email: false
 before_install:
