@@ -135,6 +135,18 @@ npm install
 npm test
 ```
 
+CI test with selenium / chrome
+
+```
+npm run test:ci
+```
+
+CI test with saucelabs
+
+```
+SAUCE_USERNAME=*** SAUCE_ACCESS_KEY=*** TEST_CLIENT="saucelabs:internet explorer:10:Windows 8" npm run test:ci
+```
+
 ### Credit
 
 Brought to you by [eHealth Africa](http://ehealthafrica.org/)
