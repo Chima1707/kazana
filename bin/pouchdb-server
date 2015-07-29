@@ -3,7 +3,7 @@
 var path = require('path');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
-var spawn = require('child_process').spawn;
+var spawn = require('win-spawn');
 var kazanaConfig = require('kazana-config');
 
 var port = kazanaConfig.pouchdbServerPort;
