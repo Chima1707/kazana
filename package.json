@@ -56,7 +56,8 @@
     "pouchdb": "^3.6.0",
     "pouchdb-authentication": "^0.4.1",
     "pouchdb-hoodie-api": "^1.4.0",
-    "pouchdb-server": "^0.6.6"
+    "pouchdb-server": "^0.6.6",
+    "win-spawn": "^2.0.0"
   },
   "devDependencies": {
     "istanbul": "^0.3.17",
