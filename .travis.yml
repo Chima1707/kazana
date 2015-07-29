@@ -37,15 +37,22 @@ after_script:
 - echo leader=$BUILD_LEADER status=$BUILD_AGGREGATE_STATUS
 env:
   matrix:
+  # all the node versions
   - NODE=0.10 COMMAND=test
   - NODE=0.12 COMMAND=test
   - NODE=iojs-v1 COMMAND=test
   - NODE=iojs-v2 COMMAND=test
   - NODE=0.10 COMMAND=test:coverage
-  - TEST_CLIENT=firefox NODE=0.10 COMMAND=test:ci
-  - KAZANA_POUCHDB_HTTP_URL=http://localhost:5984 TEST_CLIENT=firefox NODE=0.10 COMMAND=test:ci
+  # test with selenium against PouchDB Server
+  - TEST_CLIENT=selenium:firefox NODE=0.10 COMMAND=test:ci
+  # test with saucelabs and against CouchDB
+  - KAZANA_POUCHDB_HTTP_URL=http://localhost:5984 TEST_CLIENT=saucelabs:chrome NODE=0.10 COMMAND=test:ci
+  # test with IE 10
+  - TEST_CLIENT="saucelabs:internet explorer:10:Windows 8" NODE=0.10 COMMAND=test:ci
   global:
   - secure: "A24dfI7oJyeqX6bxrOumTsWw9835rMwYly71iC6Lo0907WuTNNDAD7ZopXlLhagFGjJqXyPyR5S+u3rTsELcXyfDaAU23rzU41DpCv/3OgUoN/eM0Q6Nh7bWbgBrCWS6CovhTFBcHI3FOkxP00oPS16A/+zIzxk2EHtV6ksFGwxLx5llSgudVjP4R57M92/sVpa39Vmyn2iUm/Yd1LHH0t4t57XMLB+IwZXhe2XuqfmEeIzTdEOhptPHVBLpP0fIr+Cr7yQqDKD8+Xji5uKv7WeIXaz+EfCFwiCrqO4m1p5F5hMi+7tVL3A3cjMiGlg5/SNqfE8S6IQUP2JPFNc1QjN5MV2tUKLnC9+ZPkII+G59U5ERRz8w5bHYgT2s+Su9HTWywGmapOvxk4tNzKX26wbLavgGkRSag3NCOo1QoP+Ht8CNFK017XqGPyuhd7McEhPRTV8w9uwjuN0Di4mXUy5ELKz94QWApJRa7+fIHJvyIdEh9i9EUfF4oQ35l/UFhdewO3mmkjEvs6ZEn8fiBPkxEermOul8GFbs5htQUMHHF72yLfeOdXRhnPcefFyTXgdpoECQgWpOnHh2LVKsxVlbKVDYu0M6uQx8WNhi69e+wqxbtASLGP4DkcqCBGmCpEuTc8RiuLlM9Ep03plbY9OYXbnkDCxKbL4x7coJFnA="
+  - secure: "DnT8322OV8rrCb7HG3w2kWbjxZ3hZBq9H1xQeFcEsTe9jQTsoTtBAa7bDbQVhNOlUaRxXJe4N9dHe7uhDWmwmTMS3VskTPMiJWVBBNvqbsn11Hz38qRXuKY5m8/S1oRCpt/oXORaF0aQB/XQDfjggCx52syqyJQS7e3SIYF2j6nTy9Tco6c6cdqD4Iz5CtDmJ5JCz0vw3DwN0xYDe4BJmQkGy/LdOsU/nnFKYaIJEebL9EShpS4H+qHRTj0Crgs9neXG4LKYT8YSWFxZCjhHjTPfr6/A2HXWdRMDaZQat96oXfcBraU3Ez6dI10pfL/W5oJAjzW71suqXalGfjcAmcl3rDVgUbE9WpcIBAnlXg1mojawLQNRQ4pHo4Uq+Dc2SlHcaBk8nDzUwtz2AmWx2BTq5M/UAhpHgf/c5acjdOTgKeVkwo0ltjtIOix4JpATF1B3pDSMvDP46TO6rw9eqNJQOHj8WnwVQxA7btokdTZd3yqfjkNSG0cFnsPKuIWSRnOcgTe5f7dhT2Kswe+S7GZb2NLHIXM46rDI+K8FwxWFBy0htsZPgwKyTf1xNkqUHYX98JjBtKbdyzjdsie+q2DZBN4Rpxn4J2a1XwDiIcCFl32gRdBTcDoJ7VBYGWVXJsM6HE0au8KV8IhUrObkiqCrHmrjArvMdlocLsz5ehs="
+  - secure: "kGah9mFUb6tnjKLBjZwx/a03mHDywiyjb8nYACc4Rln1KKQ1SBTjWM4rU/10fP3DgEbfj/n2YKy5WlBNeiX0xr+uJ5kYe0lhVXJywRLXxEm9rWN39dQVOAWAxgcg2LftMtKrWGTNyQMeBBKm4d3hVb0CIaggrnhxEGvxpEExWY9+w/bfu8EVV4B8gY8vjD1iSa8JxEk5GOPmQdC496pzdMOV/O21x2kzkEb3bTYYOrqsS3eArFDJgOY777CeN9peqp0eVb3oyrfYuX7aBXjN+XDVp7EW3qRYjs2mqKl4hEoQAAZft6kU84PZlUpiHULXbbDFjIG7Dc1/dcaD6fQUISLl1BvgUZZUAii5UeOQ5czAqaaJgDF9SMinATzjUf8aMlHNvjsS63HbvuWcOb97zg1qFdNmTbcXwhcXbSAV9NxPvycX3ESHfQfrOUQNQI6NLWG8vlUrU1i5RtZQnJtqjFo3NQkM5o91SlAQPfG2rdUgWweYgRi3BI/tX60CmYecX6mbtwd68v9ggPARvw+NCCrrHYk6oVesoszDEBCUw1EHVdQG6sGR4GraeCB2XB0Ygm7WgvuLoLWT3kPZz0UPc6Kh+IYMaUy8jsNGAyYn2tch+Cy1nbByuZnSwlxgKUVLUsn8dR7mNqLzddx+6nTWq24wwiZ5uSogtT1EvM3NgmA="
 deploy:
   provider: npm
   email: gregor@martynus.net
