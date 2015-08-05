@@ -4,6 +4,7 @@ var Kazana = require('../index');
 var options = require('minimist')(process.argv.slice(2));
 var kazanaConfig = require('kazana-config');
 var main = require(process.cwd());
+var spawnPouchdbServer = require('spawn-pouchdb-server')
 
 var corePlugins = require('../lib/core-plugins');
 var plugins = corePlugins.concat(main.plugins || []);
@@ -22,6 +23,7 @@ if (options.only) {
 
 if (kazanaConfig.pouchdbHttpUrl) {
   console.log('Connected to CouchDB at %s', kazanaConfig.pouchdbHttpUrl);
+  startKazana()
 } else {
   if (options.bare) {
     console.error('Must set KAZANA_POUCHDB_HTTP_URL when starting with --bare or --only=');
@@ -29,15 +31,24 @@ if (kazanaConfig.pouchdbHttpUrl) {
   }
   kazanaConfig.pouchdbHttpUrl = 'http://localhost:' + kazanaConfig.pouchdbServerPort;
   console.log('KAZANA_POUCHDB_HTTP_URL not set, starting PouchDB Server at %s ...', kazanaConfig.pouchdbServerPort);
-  require('./pouchdb-server');
+
+  spawnPouchdbServer({
+    port: kazanaConfig.pouchdbServerPort
+  }, function (error) {
+    if (error) throw error;
+
+    startKazana()
+  })
 }
 
-var kazana = new Kazana(service || main, {
+function startKazana () {
+  var kazana = new Kazana(service || main, {
 
-  // if set to true, core modules like the kazana-raw-data do not get loaded
-  bare: options.bare
-});
+    // if set to true, core modules like the kazana-raw-data do not get loaded
+    bare: options.bare
+  });
 
-kazana.start(function () {
-  console.log('Server running at %s', kazana.info.uri);
-});
+  kazana.start(function () {
+    console.log('Server running at %s', kazana.info.uri);
+  });
+}
