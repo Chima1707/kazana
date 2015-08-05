@@ -40,7 +40,7 @@
     "boom": "^2.8.0",
     "good": "^6.3.0",
     "good-console": "^5.0.2",
-    "hapi": "^8.8.0",
+    "hapi": "^8.8.1",
     "hapi-cors-headers": "^1.0.0",
     "hoek": "^2.14.0",
     "joi": "^6.6.1",
@@ -48,10 +48,10 @@
     "kazana-bootstrap": "^1.0.4",
     "kazana-config": "^2.0.0",
     "kazana-raw-data": "^1.1.0",
-    "lodash": "^3.10.0",
+    "lodash": "^3.10.1",
     "lout": "^6.2.3",
     "minimist": "^1.1.2",
-    "pouchdb": "^3.6.0",
+    "pouchdb": "^4.0.0",
     "pouchdb-authentication": "^0.4.1",
     "pouchdb-hoodie-api": "^1.4.0",
     "spawn-pouchdb-server": "^2.0.1"
@@ -61,8 +61,8 @@
     "istanbul-coveralls": "^1.0.3",
     "kazana-integration-test": "latest",
     "semantic-release": "^3.3.2",
-    "semistandard": "^6.1.2",
+    "semistandard": "^7.0.2",
     "tap-spec": "^4.0.2",
-    "tape": "^4.0.1"
+    "tape": "^4.0.2"
   }
 }
