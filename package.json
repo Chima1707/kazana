@@ -54,7 +54,7 @@
     "pouchdb": "^4.0.0",
     "pouchdb-authentication": "^0.4.1",
     "pouchdb-hoodie-api": "^1.4.0",
-    "spawn-pouchdb-server": "^2.0.1"
+    "spawn-pouchdb-server": "^2.1.0"
   },
   "devDependencies": {
     "istanbul": "^0.3.17",
