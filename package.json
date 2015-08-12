@@ -40,9 +40,11 @@
     "boom": "^2.8.0",
     "good": "^6.3.0",
     "good-console": "^5.0.2",
-    "hapi": "^8.8.1",
+    "h2o2": "^4.0.1",
+    "hapi": "^9.0.1",
     "hapi-cors-headers": "^1.0.0",
     "hoek": "^2.14.0",
+    "inert": "^3.0.1",
     "joi": "^6.6.1",
     "kazana-account": "^1.0.0",
     "kazana-bootstrap": "^1.0.4",
@@ -54,7 +56,8 @@
     "pouchdb": "^4.0.0",
     "pouchdb-authentication": "^0.4.1",
     "pouchdb-hoodie-api": "^1.4.0",
-    "spawn-pouchdb-server": "^2.1.0"
+    "spawn-pouchdb-server": "^2.1.0",
+    "vision": "^2.0.1"
   },
   "devDependencies": {
     "istanbul": "^0.3.17",
