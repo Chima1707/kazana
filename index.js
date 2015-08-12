@@ -8,6 +8,9 @@ var good = require('good');
 var goodConsole = require('good-console');
 var Hapi = require('hapi');
 var Hoek = require('hoek');
+var Inert = require('inert');
+var H2o2 = require('h2o2');
+var Vision = require('vision');
 
 var path = require('path');
 var PouchDB = require('pouchdb');
@@ -76,6 +79,16 @@ function kazanaServer (main, options) {
   }, function (error) {
     if (error) console.error(error);
   });
+
+  // static file handling
+  server.register(Inert, function () {});
+
+  // reverse proxy routes
+  server.register(H2o2, function () {});
+
+  // view routes (currently required by lout)
+  // see https://github.com/hapijs/lout/issues/115
+  server.register(Vision, function () {});
 
   // auth
   server.auth.scheme('couchdb', couchdbAuth);
