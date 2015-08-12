@@ -58,7 +58,7 @@ function kazanaServer (main, options) {
     })
   };
 
-  // loogin
+  // logging
   var loggerOptions = {
     opsInterval: 1000,
     reporters: [{
@@ -70,7 +70,6 @@ function kazanaServer (main, options) {
       }
     }]
   };
-
   server.register({
     register: good,
     options: loggerOptions
