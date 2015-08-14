@@ -8,8 +8,6 @@
     "kazana-services": "./bin/services"
   },
   "scripts": {
-    "postpublish": "semantic-release post",
-    "prepublish": "semantic-release pre",
     "pretest:ci": "rm -rf node_modules/kazana-integration-test/node_modules/kazana-example/node_modules/kazana && ln -s $(pwd) node_modules/kazana-integration-test/node_modules/kazana-example/node_modules/kazana",
     "start": "./bin/server",
     "test": "semistandard && npm run test:node | tap-spec",
