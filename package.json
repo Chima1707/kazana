@@ -4,7 +4,8 @@
   "main": "index.js",
   "bin": {
     "kazana": "./bin/server",
-    "kazana-services": "./bin/services"
+    "kazana-services": "./bin/services",
+    "kazana-env": "./bin/env"
   },
   "scripts": {
     "pretest:ci": "rm -rf node_modules/kazana-integration-test/node_modules/kazana-example/node_modules/kazana && ln -s $(pwd) node_modules/kazana-integration-test/node_modules/kazana-example/node_modules/kazana",
