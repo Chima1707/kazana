@@ -124,6 +124,43 @@ callback when finished initialisation.
 Array of objects with same properties as `options` for the
 `Kazana` constructor.
 
+## Scripts
+
+### kazana-services
+
+```
+$ kazana-services 
+npm start -- --only=account
+npm start -- --only=raw-data
+npm start -- --bare
+```
+
+Lists commands to start main app and plugins in separate processes
+
+### kazana-env
+
+```
+$ kazana-env 
+$ bin/env 
+- KAZANA_PLUGIN_PORT_ACCOUNT
+  default: <no default>
+  value: <not set>
+  Port number for account service
+- KAZANA_PLUGIN_PORT_RAW_DATA
+  default: <no default>
+  value: <not set>
+  Port number for raw-data service
+- KAZANA_APP_PORT
+  default: 5000
+  value: <not set>
+...
+```
+
+Lists all avaialble ENV variables for configuration, including
+defaults and currently set value
+
+Lists commands to start main app and plugins in separate processes
+
 ## Local setup and Testing
 
 [![devDependency Status](https://david-dm.org/eHealthAfrica/kazana/dev-status.svg)](https://david-dm.org/eHealthAfrica/kazana#info=devDependencies)
