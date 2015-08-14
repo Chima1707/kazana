@@ -46,7 +46,7 @@
     "joi": "^6.6.1",
     "kazana-account": "^1.0.0",
     "kazana-bootstrap": "^1.0.4",
-    "kazana-config": "^2.0.0",
+    "kazana-config": "^3.1.0",
     "kazana-raw-data": "^1.1.0",
     "lodash": "^3.10.1",
     "lout": "^6.2.3",
