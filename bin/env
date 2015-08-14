@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+var snakeCase = require('lodash/string/snakeCase');
+
+var main = require(process.cwd());
+var corePlugins = require('../lib/core-plugins');
+var configOptions = require('kazana-config/raw');
+
+var plugins = corePlugins.concat(main.plugins || []);
+console.log(plugins.map(toPortNumber).join('\n'));
+console.log(Object.keys(configOptions).map(toConfigEnv).join('\n'));
+
+function toPortNumber (object) {
+  var envName = 'KAZANA_PLUGIN_PORT_' + snakeCase(object.name).toUpperCase();
+  return [
+    '- ' + envName,
+    '  default: <no default>',
+    '  value: ' + (process.env[envName] || '<not set>'),
+    '  Port number for ' + object.name + ' service'
+  ].join('\n');
+}
+function toConfigEnv (key) {
+  var envName = configOptions[key].env;
+  var lines = [
+    '- ' + envName,
+    '  default: ' + (configOptions[key].default || '<no default>'),
+    '  value: ' + (process.env[envName] || '<not set>')
+  ];
+
+  if (configOptions[key].description) {
+    lines.push('  ' + configOptions[key].description);
+  }
+
+  return lines.join('\n');
+}
