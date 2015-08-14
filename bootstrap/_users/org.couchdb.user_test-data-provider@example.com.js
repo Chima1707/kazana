@@ -1,4 +1,4 @@
-var password = require('kazana-config').pouchdbHttpAdminPass;
+var password = require('kazana-config').adminPass;
 
 module.exports = {
   _id: 'org.couchdb.user:kazana-data-provider@example.com',

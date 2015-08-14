@@ -26,6 +26,7 @@ var couchdbAuth = require('./lib/auth/couchdb');
 var replyPouchDbError = require('./lib/decorators/reply-pouchdb-error');
 
 // methods
+var getCouchUrl = require('./lib/methods/get-couch-url');
 var getStore = require('./lib/methods/get-store');
 var getUser = require('./lib/methods/get-user');
 
@@ -50,6 +51,9 @@ function kazanaServer (main, options) {
     uuid: PouchDB.utils.uuid
   };
 
+  server.method('getCouchUrl', getCouchUrl, {
+    bind: server
+  });
   server.app.admin = {
     rawData: getStore.call(server, {
       name: 'raw-data',
@@ -111,9 +115,9 @@ function kazanaServer (main, options) {
   bootstrap({
     bootstrapPath: path.resolve(__dirname, './bootstrap'),
     couchdb: {
-      url: server.settings.app.pouchdbHttpUrl,
-      adminUser: server.settings.app.pouchdbHttpAdminUser,
-      adminPass: server.settings.app.pouchdbHttpAdminPass
+      url: server.methods.getCouchUrl(),
+      adminUser: server.settings.app.adminUser,
+      adminPass: server.settings.app.adminPass
     },
     log: server.log.bind(server)
   }, function (error) {

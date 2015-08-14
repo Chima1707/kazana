@@ -21,24 +21,34 @@ if (options.only) {
   options.bare = true;
 }
 
-if (kazanaConfig.pouchdbHttpUrl) {
-  console.log('Connected to CouchDB at %s', kazanaConfig.pouchdbHttpUrl);
-  startKazana()
+if (kazanaConfig.backendName === 'couchdb') {
+  console.log('Connected to CouchDB at %s', kazanaConfig.backendLocation);
+  startKazana();
 } else {
   if (options.bare) {
-    console.error('Must set KAZANA_POUCHDB_HTTP_URL when starting with --bare or --only=');
+    console.error('Must set KAZANA_BACKEND_NAME="couchdb" & KAZANA_BACKEND_LOCATION="http://my.couch.com:5984" when starting with --bare or --only=');
     process.exit(1);
   }
-  kazanaConfig.pouchdbHttpUrl = 'http://localhost:' + kazanaConfig.pouchdbServerPort;
-  console.log('KAZANA_POUCHDB_HTTP_URL not set, starting PouchDB Server at %s ...', kazanaConfig.pouchdbServerPort);
+  console.log('KAZANA_POUCHDB_HTTP_URL not set, starting PouchDB Server at %s ...', kazanaConfig.backendPort);
 
   spawnPouchdbServer({
-    port: kazanaConfig.pouchdbServerPort
+    port: kazanaConfig.backendPort,
+    backend: {
+      name: kazanaConfig.backendName,
+      location: kazanaConfig.backendLocation
+    },
+    log: {
+      file: kazanaConfig.backendLogFile,
+      level: kazanaConfig.backendLogLevel
+    },
+    config: {
+      file: kazanaConfig.backendConfigFile
+    }
   }, function (error) {
     if (error) throw error;
 
-    startKazana()
-  })
+    startKazana();
+  });
 }
 
 function startKazana () {
