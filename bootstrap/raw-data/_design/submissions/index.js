@@ -5,4 +5,4 @@ module.exports = {
       reduce: '_count'
     }
   }
-};
+}

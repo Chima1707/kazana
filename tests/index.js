@@ -1,1 +1,1 @@
-require('./specs/core-plugins');
+require('./specs/core-plugins')
