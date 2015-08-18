@@ -10,7 +10,7 @@
   "scripts": {
     "pretest:ci": "rm -rf node_modules/kazana-integration-test/node_modules/kazana-example/node_modules/kazana && ln -s $(pwd) node_modules/kazana-integration-test/node_modules/kazana-example/node_modules/kazana",
     "start": "./bin/server",
-    "test": "semistandard && npm run test:node | tap-spec",
+    "test": "standard && npm run test:node | tap-spec",
     "test:ci": "( cd node_modules/kazana-integration-test/ ; bin/test-background )",
     "test:coverage": "istanbul cover tests",
     "test:coverage:upload": "istanbul-coveralls",
@@ -63,7 +63,7 @@
     "istanbul-coveralls": "^1.0.3",
     "kazana-integration-test": "latest",
     "semantic-release": "^4.0.3",
-    "semistandard": "^7.0.2",
+    "standard": "^5.1.0",
     "tap-spec": "^4.0.2",
     "tape": "^4.1.0"
   }
