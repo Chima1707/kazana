@@ -29,7 +29,7 @@ if (kazanaConfig.backendName === 'couchdb') {
     console.error('Must set KAZANA_BACKEND_NAME="couchdb" & KAZANA_BACKEND_LOCATION="http://my.couch.com:5984" when starting with --bare or --only=');
     process.exit(1);
   }
-  console.log('KAZANA_POUCHDB_HTTP_URL not set, starting PouchDB Server at %s ...', kazanaConfig.backendPort);
+  console.log('KAZANA_BACKEND_LOCATION not set, starting PouchDB Server at %s ...', kazanaConfig.backendPort);
 
   spawnPouchdbServer({
     port: kazanaConfig.backendPort,
