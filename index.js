@@ -2,7 +2,7 @@ module.exports = kazanaServer
 
 var _ = require('lodash')
 var bootstrap = require('kazana-bootstrap')
-var config = require('kazana-config')
+var getConfig = require('kazana-config')
 var corsHeaders = require('hapi-cors-headers')
 var good = require('good')
 var goodConsole = require('good-console')
@@ -32,6 +32,7 @@ var getUser = require('./lib/methods/get-user')
 
 function kazanaServer (main, options) {
   if (!options) options = {}
+  var config = getConfig(main)
   var server = new Hapi.Server({
     app: _.merge({}, config, options),
     connections: {
@@ -114,11 +115,8 @@ function kazanaServer (main, options) {
 
   bootstrap({
     bootstrapPath: path.resolve(__dirname, './bootstrap'),
-    couchdb: {
-      url: server.methods.getCouchUrl(),
-      adminUser: server.settings.app.adminUser,
-      adminPass: server.settings.app.adminPass
-    },
+    config: config,
+    couchUrl: server.methods.getCouchUrl(),
     log: server.log.bind(server)
   }, function (error) {
     if (error) throw error

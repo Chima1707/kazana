@@ -2,7 +2,7 @@
 
 var Kazana = require('../index')
 var options = require('minimist')(process.argv.slice(2))
-var kazanaConfig = require('kazana-config')
+var getConfig = require('kazana-config')
 var main = require(process.cwd())
 var spawnPouchdbServer = require('spawn-pouchdb-server')
 
@@ -10,6 +10,8 @@ var corePlugins = require('../lib/core-plugins')
 var plugins = corePlugins.concat(main.plugins || [])
 var findWhere = require('lodash/collection/findWhere')
 var pluck = require('lodash/collection/pluck')
+
+var config = getConfig(main)
 
 if (options.only) {
   var service = findWhere(plugins, {name: options.only})
@@ -21,28 +23,28 @@ if (options.only) {
   options.bare = true
 }
 
-if (kazanaConfig.backendName === 'couchdb') {
-  console.log('Connected to CouchDB at %s', kazanaConfig.backendLocation)
+if (config.backend.name === 'couchdb') {
+  console.log('Connected to CouchDB at %s', config.backend.location)
   startKazana()
 } else {
   if (options.bare) {
     console.error('Must set KAZANA_BACKEND_NAME="couchdb" & KAZANA_BACKEND_LOCATION="http://my.couch.com:5984" when starting with --bare or --only=')
     process.exit(1)
   }
-  console.log('KAZANA_BACKEND_LOCATION not set, starting PouchDB Server at %s ...', kazanaConfig.backendPort)
+  console.log('KAZANA_BACKEND_LOCATION not set, starting PouchDB Server at %s ...', config.backend.port)
 
   spawnPouchdbServer({
-    port: kazanaConfig.backendPort,
+    port: config.backend.port,
     backend: {
-      name: kazanaConfig.backendName,
-      location: kazanaConfig.backendLocation
+      name: config.backend.name,
+      location: config.backend.location
     },
     log: {
-      file: kazanaConfig.backendLogFile,
-      level: kazanaConfig.backendLogLevel
+      file: config.backend.log.file,
+      level: config.backend.log.level
     },
     config: {
-      file: kazanaConfig.backendConfigFile
+      file: config.backend.config.file
     }
   }, function (error) {
     if (error) throw error
