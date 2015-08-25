@@ -48,7 +48,7 @@
     "kazana-account": "^2.0.0",
     "kazana-bootstrap": "^1.0.4",
     "kazana-config": "^4.0.0",
-    "kazana-raw-data": "^2.0.0",
+    "kazana-raw-data": "^3.0.0",
     "lodash": "^3.10.1",
     "lout": "^6.2.3",
     "minimist": "^1.1.3",
