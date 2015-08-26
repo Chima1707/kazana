@@ -3,7 +3,7 @@
 var Kazana = require('../index')
 var options = require('minimist')(process.argv.slice(2))
 var getConfig = require('kazana-config')
-var main = require(process.cwd())
+var main = require(options.main || process.cwd())
 var spawnPouchdbServer = require('spawn-pouchdb-server')
 
 var corePlugins = require('../lib/core-plugins')
