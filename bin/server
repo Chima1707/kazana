@@ -54,7 +54,12 @@ if (config.backend.name === 'couchdb') {
 }
 
 function startKazana () {
-  var kazana = new Kazana(service || main, {
+  var config = service || main
+  if (options.port) {
+    config.port = parseInt(options.port, 10)
+  }
+
+  var kazana = new Kazana(config, {
     // if set to true, core modules like the kazana-raw-data do not get loaded
     bare: options.bare
   })
