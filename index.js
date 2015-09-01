@@ -43,7 +43,7 @@ function kazanaServer (main, options) {
   })
 
   server.connection({
-    port: main.port
+    port: config.port
   })
 
   server.app.utils = {
