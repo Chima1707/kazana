@@ -13,7 +13,6 @@
 module.exports = {
   name: 'myapp',
   version: '1.0.0',
-  port: 5000,
   static: 'public',
   routes: routes,
   bootstrap: 'bootstrap',
