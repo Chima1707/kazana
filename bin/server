@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
-var Kazana = require('../index')
+var Kazana = require('kazana-server')
 var options = require('minimist')(process.argv.slice(2))
-var getConfig = require('kazana-config')
-var main = require(options.main || process.cwd())
+var path = require('path')
+var mainPath = options.main ? path.resolve(options.main) : process.cwd()
+var main = require(mainPath)
 var spawnPouchdbServer = require('spawn-pouchdb-server')
 
-var corePlugins = require('../lib/core-plugins')
-var plugins = corePlugins.concat(main.plugins || [])
+var plugins = main.plugins || []
 var findWhere = require('lodash/collection/findWhere')
 var pluck = require('lodash/collection/pluck')
 
-var config = getConfig(main)
+var config = Kazana.getConfig(main)
 
 if (options.only) {
   var service = findWhere(plugins, {name: options.only})
@@ -57,6 +57,11 @@ function startKazana () {
   var config = service || main
   if (options.port) {
     config.port = parseInt(options.port, 10)
+  }
+
+  if (!service) {
+    var core = require('../index')
+    config.plugins = [core].concat(plugins || [])
   }
 
   var kazana = new Kazana(config, {

@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 var main = require(process.cwd());
-var corePlugins = require('../lib/core-plugins');
 
-var plugins = corePlugins.concat(main.plugins || []);
-console.log(plugins.map(toCommand).join('\n'));
+var core = require('../index')
+main.plugins = [core].concat(main.plugins || [])
+
+console.log(main.plugins.map(toCommand).join('\n'));
 console.log('npm start -- --bare');
 
 function toCommand (object) {
