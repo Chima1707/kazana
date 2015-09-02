@@ -10,7 +10,7 @@
     "pretest": "rm -rf node_modules/kazana-integration-test/node_modules/kazana-example/node_modules/kazana && ln -s $(pwd) node_modules/kazana-integration-test/node_modules/kazana-example/node_modules/kazana",
     "start": "kazana",
     "services": "kazana-services",
-    "test": "( cd node_modules/kazana-integration-test/ ; bin/test-background )",
+    "test": "( cd node_modules/kazana-integration-test/ ; rm -f .npmrc ; bin/test-background )",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
