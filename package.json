@@ -11,7 +11,8 @@
     "start": "kazana",
     "services": "kazana-services",
     "test": "( cd node_modules/kazana-integration-test/ ; rm -f .npmrc ; bin/test-background )",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "postsemantic-release": "bundle-bump-bot -u eHealthAfrica -r kazana-example"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "spawn-pouchdb-server": "^3.1.0"
   },
   "devDependencies": {
+    "bundle-bump-bot": "^1.1.0",
     "kazana-integration-test": "latest",
     "semantic-release": "^4.3.4"
   },
