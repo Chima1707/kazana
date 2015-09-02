@@ -40,7 +40,8 @@
     "spawn-pouchdb-server": "^3.1.0"
   },
   "devDependencies": {
-    "kazana-integration-test": "latest"
+    "kazana-integration-test": "latest",
+    "semantic-release": "^4.3.4"
   },
   "bundleDependencies": [
     "kazana-account",
