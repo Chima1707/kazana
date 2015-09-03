@@ -15,6 +15,9 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 before_script:
   - npm prune
+  - 'curl -Lo travis_after_all.py https://git.io/vLSON'
 script: TEST_CLIENT=selenium:firefox npm test
 after_success:
+  - python travis_after_all.py
+  - export $(cat .to_export_back)
   - npm run semantic-release
