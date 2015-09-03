@@ -7,7 +7,9 @@ var mainPath = options.main ? path.resolve(options.main) : process.cwd()
 var main = require(mainPath)
 var spawnPouchdbServer = require('spawn-pouchdb-server')
 
-var plugins = main.plugins || []
+var core = require('../index')
+var corePlugins = [core].concat(main.plugins || [])
+var plugins = Kazana.gatherPlugins(corePlugins)
 var findWhere = require('lodash/collection/findWhere')
 var pluck = require('lodash/collection/pluck')
 
@@ -60,8 +62,7 @@ function startKazana () {
   }
 
   if (!service) {
-    var core = require('../index')
-    config.plugins = [core].concat(plugins || [])
+    config.plugins = corePlugins
   }
 
   var kazana = new Kazana(config, {
