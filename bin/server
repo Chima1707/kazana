@@ -70,6 +70,6 @@ function startKazana () {
   })
 
   kazana.start(function () {
-    console.log('Server running at %s', kazana.info.uri)
+    kazana.log([config.name, 'info'], 'Server running at ' + kazana.info.uri)
   })
 }
