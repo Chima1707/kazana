@@ -44,7 +44,8 @@
     "bundle-bump-bot": "^1.1.0",
     "dynamic-bundle": "^1.0.0",
     "kazana-integration-test": "latest",
-    "semantic-release": "^4.3.4"
+    "semantic-release": "^4.3.4",
+    "istanbul": "0.3.19"
   },
   "greenkeeper": {
     "ignore": [
