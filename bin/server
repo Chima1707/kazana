@@ -35,6 +35,8 @@ if (config.backend.name === 'couchdb') {
   }
   console.log('backend.location not set, starting PouchDB Server at %s ...', config.backend.port)
 
+  var admins = {}
+  admins[config.admin.username] = config.admin.password
   spawnPouchdbServer({
     port: parseInt(config.backend.port, 10),
     backend: {
@@ -46,7 +48,8 @@ if (config.backend.name === 'couchdb') {
       level: config.backend.log.level
     },
     config: {
-      file: config.backend.config.file
+      file: config.backend.config.file,
+      admins: admins
     }
   }, function (error) {
     if (error) throw error
