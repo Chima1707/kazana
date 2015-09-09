@@ -6,7 +6,8 @@ cache:
 notifications:
   email: false
 node_js:
-  - iojs-v2
+  # re-enab le iojs when https://github.com/pouchdb/pouchdb/pull/4236 is resolved
+  # - iojs-v2
   - '0.12'
   - '0.10'
 before_install:
