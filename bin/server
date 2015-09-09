@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var Kazana = require('kazana-server')
+var startKazanaServer = require('kazana-server')
 var options = require('minimist')(process.argv.slice(2))
 var path = require('path')
 var mainPath = options.main ? path.resolve(options.main) : process.cwd()
@@ -9,11 +9,11 @@ var spawnPouchdbServer = require('spawn-pouchdb-server')
 
 var core = require('../index')
 var corePlugins = [core].concat(main.plugins || [])
-var plugins = Kazana.gatherPlugins(corePlugins)
+var plugins = startKazanaServer.gatherPlugins(corePlugins)
 var findWhere = require('lodash/collection/findWhere')
 var pluck = require('lodash/collection/pluck')
 
-var config = Kazana.getConfig(main)
+var config = startKazanaServer.getConfig(main)
 
 if (options.only) {
   var service = findWhere(plugins, {name: options.only})
@@ -68,12 +68,20 @@ function startKazana () {
     config.plugins = corePlugins
   }
 
-  var kazana = new Kazana(config, {
+  startKazanaServer(config, {
     // if set to true, core modules like the kazana-raw-data do not get loaded
     bare: options.bare
-  })
+  }, function (error, server) {
+    if (error) {
+      throw new Error(error.message)
+    }
 
-  kazana.start(function () {
-    kazana.log([config.name, 'info'], 'Server running at ' + kazana.info.uri)
+    server.start(function (error) {
+      if (error) {
+        throw error
+      }
+
+      console.log('Server running at ' + server.info.uri)
+    })
   })
 }
