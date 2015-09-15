@@ -34,7 +34,7 @@
   "homepage": "https://github.com/eHealthAfrica/kazana#readme",
   "dependencies": {
     "kazana-account": "2.0.0",
-    "kazana-raw-data": "4.0.0",
+    "kazana-raw-data": "4.0.1",
     "kazana-server": "2.0.0",
     "lodash": "^3.10.1",
     "minimist": "^1.2.0",
