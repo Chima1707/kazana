@@ -38,7 +38,8 @@
     "kazana-server": "2.2.0",
     "lodash": "^3.10.1",
     "minimist": "^1.2.0",
-    "spawn-pouchdb-server": "3.1.0"
+    "spawn-pouchdb-server": "3.1.0",
+    "hoek": "2.16.3"
   },
   "devDependencies": {
     "bundle-bump-bot": "^1.1.0",
