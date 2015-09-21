@@ -46,7 +46,7 @@
     "dynamic-bundle": "^1.0.0",
     "istanbul": "^0.3.20",
     "kazana-integration-test": "latest",
-    "semantic-release": "^4.3.4"
+    "semantic-release": "^4.3.5"
   },
   "greenkeeper": {
     "ignore": [
