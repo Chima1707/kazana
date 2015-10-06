@@ -39,6 +39,7 @@ if (config.backend.name === 'couchdb') {
   admins[config.admin.username] = config.admin.password
   spawnPouchdbServer({
     port: parseInt(config.backend.port, 10),
+    timeout: parseInt(config.backend.timeout, 10),
     backend: {
       name: config.backend.name,
       location: config.backend.location
