@@ -5,7 +5,6 @@ var options = require('minimist')(process.argv.slice(2))
 var path = require('path')
 var mainPath = options.main ? path.resolve(options.main) : process.cwd()
 var main = require(mainPath)
-var spawnPouchdbServer = require('spawn-pouchdb-server')
 
 var core = require('../index')
 var corePlugins = [core].concat(main.plugins || [])
@@ -27,37 +26,15 @@ if (options.only) {
 
 if (config.backend.name === 'couchdb') {
   console.log('Connected to CouchDB at %s', config.backend.location)
-  startKazana()
 } else {
   if (options.bare) {
     console.error('Must set backend.name="couchdb" & backend.location="http://my.couch.com:5984" when starting with --bare or --only=')
     process.exit(1)
   }
   console.log('backend.location not set, starting PouchDB Server at %s ...', config.backend.port)
-
-  var admins = {}
-  admins[config.admin.username] = config.admin.password
-  spawnPouchdbServer({
-    port: parseInt(config.backend.port, 10),
-    timeout: parseInt(config.backend.timeout, 10),
-    backend: {
-      name: config.backend.name,
-      location: config.backend.location
-    },
-    log: {
-      file: config.backend.log.file,
-      level: config.backend.log.level
-    },
-    config: {
-      file: config.backend.config.file,
-      admins: admins
-    }
-  }, function (error) {
-    if (error) throw error
-
-    startKazana()
-  })
 }
+
+startKazana()
 
 function startKazana () {
   var config = service || main
