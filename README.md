@@ -13,7 +13,7 @@
 module.exports = {
   name: 'myapp',
   version: '1.0.0',
-  static: 'public',
+  public: 'public',
   routes: routes,
   bootstrap: 'bootstrap',
   indices: {
@@ -57,12 +57,12 @@ Name of the app / plugin
 
 Default port number for app.
 
-### static
+### public
 
-Path to folder from where to serve static assets at the root path.
+Path to folder from where to serve public assets at the root path.
 
 ```js
-  static: 'public'
+  public: 'public'
 ```
 
 Is simply a shortcut for
@@ -128,7 +128,7 @@ Array of objects with same properties as `options` for the
 ### kazana-services
 
 ```
-$ kazana-services 
+$ kazana-services
 npm start -- --only=account
 npm start -- --only=raw-data
 npm start -- --bare
