@@ -44,7 +44,7 @@
   "devDependencies": {
     "bundle-bump-bot": "1.1.0",
     "dynamic-bundle": "1.0.0",
-    "istanbul": "0.3.22",
+    "istanbul": "0.4.0",
     "kazana-integration-test": "1.2.0",
     "semantic-release": "4.3.5"
   },
